@@ -1,7 +1,6 @@
 from Database import Database
-from Network.client import *
+from client import *
 from uuid import uuid4
-from Network.client import get_node_data
 
 nodeList = []
 
@@ -47,7 +46,6 @@ def load_nodes():
                 'type': node['type'],
                 'ports': []
             })
-    print(nodeList)
 
 
 def get_node_index_by_id(_id):

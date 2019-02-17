@@ -1,11 +1,13 @@
 from flask import Flask, request, jsonify
 from controller import *
-from Network.client import get_node_data
+from client import get_node_data
 from modes import Modes
 from inputs import Inputs
 
 inputs = Inputs()
 modes = Modes()
+Database.initialize()
+load_nodes()
 
 app = Flask(__name__)
 
@@ -131,7 +133,6 @@ def load_all_inputs():
 @app.route('/create_input', methods=['POST'])
 def create_input():
     data = request.get_json()
-    print(data)
     if data['id'] == '':
         inputs.create_update_input(name=data['name'], val='0', active_mode_id=data['active_mode_id'],
                                    active_mode=data['active_mode'], inactive_mode_id=data['inactive_mode_id'],
@@ -171,5 +172,4 @@ def handle_input():
     return "OK"
 
 
-def start_server():
-    app.run(host='0.0.0.0', port=3000, threaded=True)
+app.run(host='0.0.0.0', port=3000, threaded=True)
