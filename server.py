@@ -172,4 +172,4 @@ def handle_input():
     return "OK"
 
 
-app.run(host='0.0.0.0', port=3000, threaded=True)
+app.run(host='0.0.0.0')
