@@ -162,7 +162,7 @@ def handle_input():
     return "OK"
 
 @app.route('/system_update')
-def handle_input():
+def systemupdate():
     os.system("git pull")
     return "OK"
 
