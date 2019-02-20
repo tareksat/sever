@@ -4,7 +4,8 @@ from controller import *
 from client import get_node_data
 from modes import Modes
 from inputs import Inputs
-#github repo
+import os
+
 inputs = Inputs()
 modes = Modes()
 Database.initialize()
@@ -158,6 +159,11 @@ def handle_input():
         modes.activate_mode(i['active_mode_id'])
     else:
         modes.activate_mode(i['inactive_mode_id'])
+    return "OK"
+
+@app.route('/system_update')
+def handle_input():
+    os.system("git pull")
     return "OK"
 
 
