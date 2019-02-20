@@ -5,11 +5,15 @@ from client import get_node_data
 from modes import Modes
 from inputs import Inputs
 import os
+from fan_control import FanControl
 
 inputs = Inputs()
 modes = Modes()
 Database.initialize()
 load_nodes()
+fanControl = FanControl()
+fanControl.start()
+
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -163,8 +167,8 @@ def handle_input():
 
 @app.route('/system_update')
 def systemupdate():
-    os.system("git pull")
+    os.system("sudo git pull")
+    os.system("sudo reboot1")
     return "OK"
-# tarek morshed
 
 app.run(host='0.0.0.0', port=3000)

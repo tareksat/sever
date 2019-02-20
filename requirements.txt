@@ -2,3 +2,4 @@ pymongo == 2.7
 flask
 gpiozero
 uwsgi
+flask_cors
