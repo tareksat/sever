@@ -1,13 +1,13 @@
 import threading
 import io
 import time
-from gpiozero import PWMLED
+from gpiozero import LED
 
 
 class FanControl(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
-        self.fan = PWMLED(18)
+        self.fan = LED(18)
 
     def run(self):
         while True:
@@ -16,9 +16,8 @@ class FanControl(threading.Thread):
             temp = float(t) / 1000
             print(temp)
             if temp < 35:
-                self.fan.value = 0
-            elif temp > 35 and temp < 40:
-                self.fan.value = 0.7
-            elif temp > 40:
-                self.fan.value = 1
+                self.fan.off()
+            elif temp > 45 :
+                self.fan.on()
+
             time.sleep(2)
