@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from controller import *
 from client import get_node_data
 from modes import Modes
@@ -10,7 +11,7 @@ Database.initialize()
 load_nodes()
 
 app = Flask(__name__)
-
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/', methods=['POST'])
 def update_node():
@@ -73,18 +74,6 @@ def update_node_module():
     small_node = {'name': data['name']}
     create_small_node(data['name'])
     return"ok"
-#
-#
-#
-# # for small modules
-# @app.route('/get_node_data', methods=['POST'])
-# def get_node_data():
-#     data = request.get_json()
-#     node = get_node_data_by_name(name=data['name'])
-#     if node is not None:
-#         return jsonify({'ports': node['ports']})
-#     return "Error"
-
 
 @app.route('/create_mode', methods=['POST'])
 def create_mode():
@@ -172,4 +161,4 @@ def handle_input():
     return "OK"
 
 
-app.run(host='0.0.0.0')
+app.run(host='0.0.0.0', port=3000)
