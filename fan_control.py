@@ -7,7 +7,7 @@ from gpiozero import PWMLED
 class FanControl(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
-        self.fan = PWMLED(18)
+        self.fan = PWMLED(25)
 
     def run(self):
         while True:
